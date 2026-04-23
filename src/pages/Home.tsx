@@ -113,14 +113,18 @@ export default function Home() {
             
             <div className="space-y-4">
               {[
-                { day: 'Lundi - Vendredi', time: '08:30 - 17:30', activity: 'Core Sessions' },
-                { day: 'Samedi', time: '09:00 - 14:00', activity: 'Workshops & Labs' },
-                { day: 'Dimanche', time: 'Closed', activity: 'Personal Research' },
+                { branch: 'DIA', level: '1ère Année / 2ème Année', time: '08:30 - 17:30', days: 'Mon - Fri' },
+                { branch: 'DAI', level: '1ère Année / 2ème Année', time: '08:30 - 17:30', days: 'Mon - Fri' },
+                { branch: 'CG', level: '1ère Année / 2ème Année', time: '08:30 - 17:30', days: 'Mon - Fri' },
+                { branch: 'Workshops', level: 'All Branches', time: '09:00 - 14:00', days: 'Saturday' },
               ].map((row, i) => (
                 <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/5 group hover:border-primary/30 transition-all">
                   <div>
-                    <div className="font-bold">{row.day}</div>
-                    <div className="text-xs text-gray-500">{row.activity}</div>
+                    <div className="font-bold flex items-center space-x-2">
+                       <span className="text-primary font-black">{row.branch}</span>
+                       <span className="text-xs text-gray-500">- {row.level}</span>
+                    </div>
+                    <div className="text-[10px] text-gray-500 uppercase font-bold">{row.days}</div>
                   </div>
                   <div className="text-right">
                     <div className="text-sm font-mono text-primary font-black">{row.time}</div>

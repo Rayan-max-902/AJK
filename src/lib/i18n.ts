@@ -34,19 +34,27 @@ const resources = {
           "title": "DIA",
           "tag": "AI Development",
           "desc": "Dive deep into neural networks, data science, and the future of cognitive computing.",
-          "features": ["Neural Networks", "Machine Learning", "Big Data"]
+          "features": ["Neural Networks", "Machine Learning", "Big Data"],
+          "details": "Master the architecture of modern AI systems. From LLMs like Gemini to custom computer vision models, this program covers the mathematical foundations and practical engineering required for the AI era."
         },
         "dai": {
           "title": "DAI",
           "tag": "IT Application Dev",
           "desc": "Master end-to-end software development. From design to deployment, become an expert.",
-          "features": ["Full-Stack Dev", "Cloud Computing", "Mobile Apps"]
+          "features": ["Full-Stack Dev", "Cloud Computing", "Mobile Apps"],
+          "details": "Become a versatile full-stack engineer. You will learn to architect scalable backends and create pixel-perfect frontends using React, Node.js, and modern cloud deployment strategies."
         },
         "cg": {
           "title": "CG",
           "tag": "Accounting & Management",
           "desc": "Become a strategic leader. Learn financial management, business steering, and digital tools.",
-          "features": ["Financial Management", "Audit & Consulting", "Digital Business"]
+          "features": ["Financial Management", "Audit & Consulting", "Digital Business"],
+          "details": "Bridge the gap between business and technology. This program focuses on modern accounting practices, strategic management, and the use of ERP systems for organizational excellence."
+        },
+        "info": {
+          "more": "Detailed Branch Information",
+          "objectives": "Core Objectives",
+          "outcomes": "Professional Outcomes"
         }
       },
       "about": {
@@ -167,10 +175,10 @@ const resources = {
           "awards": "Excellence Awards"
         },
         "schedule": {
-          "title": "Study Schedule",
-          "subtitle": "Organizing time for maximum efficiency",
-          "download": "Download Full Calendar",
-          "weekly": "Weekly View"
+          "title": "Emploi du Temps Filières",
+          "subtitle": "Organisation du temps pour une efficacité maximale par branche",
+          "download": "Télécharger le Calendrier Complet",
+          "weekly": "Vue Hebdomadaire"
         },
         "events": {
           "title": "Latest Events",
@@ -211,19 +219,27 @@ const resources = {
           "title": "DIA",
           "tag": "Dév. d'Intelligence Artificielle",
           "desc": "Plongez dans le monde des réseaux neuronaux, de la science des données et du futur de l'informatique.",
-          "features": ["Réseaux Neuronaux", "Machine Learning", "Big Data"]
+          "features": ["Réseaux Neuronaux", "Machine Learning", "Big Data"],
+          "details": "Maîtrisez l'architecture des systèmes d'IA modernes. Des LLM comme Gemini aux modèles de vision par ordinateur personnalisés, ce programme couvre les fondements mathématiques et l'ingénierie pratique requis pour l'ère de l'IA."
         },
         "dai": {
           "title": "DAI",
           "tag": "Dév. d'Application Informatique",
           "desc": "Maîtrisez le développement logiciel de bout en bout. De la conception à la mise en ligne.",
-          "features": ["Full-Stack Dev", "Cloud Computing", "Mobile Apps"]
+          "features": ["Full-Stack Dev", "Cloud Computing", "Mobile Apps"],
+          "details": "Devenez un ingénieur full-stack polyvalent. Vous apprendrez à concevoir des backends évolutifs et à créer des frontends parfaits en utilisant React, Node.js et les stratégies modernes de déploiement cloud."
         },
         "cg": {
           "title": "CG",
           "tag": "Comptabilité et Gestion",
           "desc": "Devenez un leader stratégique. Apprenez la gestion financière et le pilotage d'entreprise.",
-          "features": ["Gestion Financière", "Audit & Conseil", "Digital Business"]
+          "features": ["Gestion Financière", "Audit & Conseil", "Digital Business"],
+          "details": "Faites le pont entre les affaires et la technologie. Ce programme se concentre sur les pratiques comptables modernes, la gestion stratégique et l'utilisation des systèmes ERP pour l'excellence organisationnelle."
+        },
+        "info": {
+          "more": "Informations détaillées sur la filière",
+          "objectives": "Objectifs de la formation",
+          "outcomes": "Débouchés professionnels"
         }
       },
       "about": {
@@ -344,8 +360,8 @@ const resources = {
           "awards": "Prix d'Excellence"
         },
         "schedule": {
-          "title": "Emploi du Temps",
-          "subtitle": "Organisation du temps pour une efficacité maximale",
+          "title": "Emploi du Temps Filières",
+          "subtitle": "Organisation du temps pour une efficacité maximale par branche",
           "download": "Télécharger le Calendrier Complet",
           "weekly": "Vue Hebdomadaire"
         },
@@ -388,19 +404,27 @@ const resources = {
           "title": "DIA",
           "tag": "تطوير الذكاء الاصطناعي",
           "desc": "انغمس في عالم الشبكات العصبية وعلوم البيانات ومستقبل الحوسبة المعرفية.",
-          "features": ["الشبكات العصبية", "تعلم الآلة", "البيانات الضخمة"]
+          "features": ["الشبكات العصبية", "تعلم الآلة", "البيانات الضخمة"],
+          "details": "إتقان هندسة أنظمة الذكاء الاصطناعي الحديثة. من نماذج اللغة الكبيرة مثل Gemini إلى نماذج الرؤية الحاسوبية المخصصة، يغطي هذا البرنامج الأسس الرياضية والهندسة العملية المطلوبة لعصر الذكاء الاصطناعي."
         },
         "dai": {
           "title": "DAI",
           "tag": "تطوير تطبيقات المعلوماتية",
           "desc": "أتقن تطوير البرمجيات من البداية إلى النهاية. من التصميم إلى النشر.",
-          "features": ["تطوير شامل", "الحوسبة السحابية", "تطبيقات المحمول"]
+          "features": ["تطوير شامل", "الحوسبة السحابية", "تطبيقات المحمول"],
+          "details": "كن مهندس تطوير شامل متعدد المهارات. ستتعلم هندسة النهايات الخلفية القابلة للتوسع وإنشاء نهايات أمامية مثالية باستخدام React و Node.js واستراتيجيات النشر السحابي الحديثة."
         },
         "cg": {
           "title": "CG",
           "tag": "المحاسبة والتسيير",
           "desc": "كن قائداً استراتيجياً. تعلم الإدارة المالية وتسيير المقاولات والأدوات الرقمية.",
-          "features": ["الإدارة المالية", "التدقيق والاستشارة", "الأعمال الرقمية"]
+          "features": ["الإدارة المالية", "التدقيق والاستشارة", "الأعمال الرقمية"],
+          "details": "سد الفجوة بين الأعمال والتكنولوجيا. يركز هذا البرنامج على الممارسات المحاسبية الحديثة، والإدارة الاستراتيجية، واستخدام أنظمة ERP للتميز التنظيمي."
+        },
+        "info": {
+          "more": "معلومات مفصلة عن الشعبة",
+          "objectives": "أهداف التكوين",
+          "outcomes": "الآفاق المهنية"
         }
       },
       "about": {
@@ -521,8 +545,8 @@ const resources = {
           "awards": "جوائز التميز"
         },
         "schedule": {
-          "title": "جدول الدراسة",
-          "subtitle": "تنظيم الوقت لتحقيق أقصى قدر من الكفاءة",
+          "title": "جدول الحصص حسب الشعب",
+          "subtitle": "تنظيم الوقت لتحقيق أقصى قدر من الكفاءة لكل شعبة",
           "download": "تحميل التقويم الكامل",
           "weekly": "عرض أسبوعي"
         },

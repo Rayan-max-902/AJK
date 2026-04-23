@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Cpu, Code, BarChart3, Binary, Globe, Lightbulb } from 'lucide-react';
+import { Cpu, Code, BarChart3, Binary, Globe, Lightbulb, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -83,12 +83,71 @@ export default function Programs() {
                 ))}
               </div>
 
-              <Link 
-                to="/quiz" 
-                className="w-full py-4 glass text-center rounded-2xl font-bold text-sm tracking-tight hover:bg-primary hover:text-white hover:neon-border transition-all"
-              >
-                {t('hero.learn')}
-              </Link>
+              <div className="pt-8">
+                <button
+                  onClick={() => {
+                    const el = document.getElementById(`details-${prog.title.toLowerCase()}`);
+                    el?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="w-full py-4 glass text-center rounded-2xl font-bold text-sm tracking-tight hover:bg-primary hover:text-white hover:neon-border transition-all flex items-center justify-center space-x-2"
+                >
+                  <Binary className="w-4 h-4" />
+                  <span>{t('programs.info.more')}</span>
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Detailed Info Sections */}
+      <div className="mt-32 space-y-24">
+        {programs.map((prog, i) => (
+          <motion.div
+            key={`details-${i}`}
+            id={`details-${prog.title.toLowerCase()}`}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="glass rounded-[40px] border-white/5 p-12 relative overflow-hidden"
+          >
+            <div className={`absolute top-0 left-0 w-1 h-full bg-gradient-to-b ${prog.color}`} />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div>
+                <h3 className="text-4xl font-black mb-6">{prog.title} - {t('programs.info.more')}</h3>
+                <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                  {t(`programs.${prog.title.toLowerCase()}.details`)}
+                </p>
+                <div className="space-y-6">
+                  <h4 className="text-xl font-bold flex items-center space-x-2">
+                    <Target className="w-5 h-5 text-primary" />
+                    <span>{t('programs.info.objectives')}</span>
+                  </h4>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-500">
+                    <li className="flex items-center space-x-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      <span>Professional Certification</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      <span>Industry Networking</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      <span>Job Placement Support</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      <span>Hands-on Projects</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="relative">
+                 <div className={`p-8 rounded-3xl bg-gradient-to-br ${prog.color} opacity-20 h-full flex items-center justify-center`}>
+                    <prog.icon className="w-32 h-32 opacity-50" />
+                 </div>
+              </div>
             </div>
           </motion.div>
         ))}
