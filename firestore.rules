@@ -1,0 +1,64 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Global helpers
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { 
+      return isSignedIn() && 
+             request.auth.token.email == "moatadidrayan7@gmail.com" && 
+             request.auth.token.email_verified == true; 
+    }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    // Event Validation
+    function isValidEvent(data) {
+      return data.title is string && data.title.size() <= 100 &&
+             data.description is string && data.description.size() <= 2000 &&
+             data.status in ["Open", "Closed", "Coming Soon"] &&
+             data.participationEnabled is bool &&
+             (data.get('participantCount', 0) is number);
+    }
+
+    // Project Validation
+    function isValidProject(data) {
+      return data.title is string && data.title.size() <= 100 &&
+             data.description is string && data.description.size() <= 2000;
+    }
+
+    // Settings Validation
+    function isValidSettings(data) {
+      return data.heroTitle is string && data.heroTitle.size() <= 200;
+    }
+
+    // Matches
+    match /events/{eventId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(eventId) && isValidEvent(incoming());
+      allow update: if isAdmin() && isValidEvent(incoming()) && (
+        incoming().diff(existing()).affectedKeys().hasOnly(['title', 'description', 'status', 'participationEnabled', 'participantCount', 'date', 'imageUrl'])
+      );
+      allow delete: if isAdmin();
+    }
+
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidId(projectId) && isValidProject(incoming());
+      allow update: if isAdmin() && isValidProject(incoming()) && (
+        incoming().diff(existing()).affectedKeys().hasOnly(['title', 'description', 'category', 'imageUrl'])
+      );
+      allow delete: if isAdmin();
+    }
+
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidSettings(incoming());
+    }
+  }
+}
