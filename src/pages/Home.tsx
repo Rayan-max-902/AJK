@@ -91,7 +91,7 @@ export default function Home() {
       <section className="py-24 container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-black mb-4 uppercase">
-            {t('home.schedule.title').split(' ')[0]} <span className="text-primary tracking-tighter">{t('home.schedule.title').split(' ').slice(1).join(' ')}</span>
+            {(t('home.schedule.title') || '').split(' ')[0]} <span className="text-primary tracking-tighter">{(t('home.schedule.title') || '').split(' ').slice(1).join(' ')}</span>
           </h2>
           <p className="text-muted-foreground">{t('home.schedule.subtitle')}</p>
         </div>
@@ -159,7 +159,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div>
               <h2 className="text-4xl md:text-6xl font-black uppercase mb-4">
-                {t('home.events.title').split(' ')[0]} <span className="text-primary">{t('home.events.title').split(' ').slice(1).join(' ')}</span>
+                {(t('home.events.title') || '').split(' ')[0]} <span className="text-primary">{(t('home.events.title') || '').split(' ').slice(1).join(' ')}</span>
               </h2>
               <p className="text-muted-foreground">{t('home.events.subtitle')}</p>
             </div>
@@ -230,7 +230,7 @@ export default function Home() {
           {[
             { value: "500+", label: t('nav.events') },
             { value: "50+", label: t('nav.projects') },
-            { value: "15+", label: t('events.title').split(' ')[0] },
+            { value: "15+", label: (t('events.title') || 'Events').split(' ')[0] },
             { value: "98%", label: t('about.vision.title') }
           ].map((stat, i) => (
             <div key={i}>

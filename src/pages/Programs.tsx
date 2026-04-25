@@ -14,7 +14,7 @@ export default function Programs() {
       tag: t('programs.dia.tag'),
       desc: t('programs.dia.desc'),
       color: "from-blue-600 to-cyan-500",
-      features: t('programs.dia.features', { returnObjects: true }) as string[]
+      features: (Array.isArray(t('programs.dia.features', { returnObjects: true })) ? t('programs.dia.features', { returnObjects: true }) : []) as string[]
     },
     {
       icon: Code,
@@ -22,7 +22,7 @@ export default function Programs() {
       tag: t('programs.dai.tag'),
       desc: t('programs.dai.desc'),
       color: "from-purple-600 to-pink-500",
-      features: t('programs.dai.features', { returnObjects: true }) as string[]
+      features: (Array.isArray(t('programs.dai.features', { returnObjects: true })) ? t('programs.dai.features', { returnObjects: true }) : []) as string[]
     },
     {
       icon: BarChart3,
@@ -30,7 +30,7 @@ export default function Programs() {
       tag: t('programs.cg.tag'),
       desc: t('programs.cg.desc'),
       color: "from-orange-600 to-yellow-500",
-      features: t('programs.cg.features', { returnObjects: true }) as string[]
+      features: (Array.isArray(t('programs.cg.features', { returnObjects: true })) ? t('programs.cg.features', { returnObjects: true }) : []) as string[]
     }
   ];
 

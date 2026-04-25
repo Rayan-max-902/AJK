@@ -175,10 +175,10 @@ const resources = {
           "awards": "Excellence Awards"
         },
         "schedule": {
-          "title": "Emploi du Temps Filières",
-          "subtitle": "Organisation du temps pour une efficacité maximale par branche",
-          "download": "Télécharger le Calendrier Complet",
-          "weekly": "Vue Hebdomadaire"
+          "title": "Filières Study Schedule",
+          "subtitle": "Organizing time for maximum efficiency by branch",
+          "download": "Download Full Calendar",
+          "weekly": "Weekly View"
         },
         "events": {
           "title": "Latest Events",

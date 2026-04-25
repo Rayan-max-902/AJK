@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
-import { db } from '../lib/firebase';
+import { db, storage } from '../lib/firebase';
 import { collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy } from 'firebase/firestore';
-import { LayoutDashboard, CalendarDays, Rocket, Plus, Trash2, Edit2, CheckCircle2, XCircle } from 'lucide-react';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { LayoutDashboard, CalendarDays, Rocket, Plus, Trash2, Edit2, CheckCircle2, XCircle, Upload, Image as ImageIcon, Loader2 } from 'lucide-react';
 
 export default function AdminDashboard() {
   const { user, isAdmin, loading: authLoading } = useAuth();
@@ -13,6 +14,8 @@ export default function AdminDashboard() {
   const [projects, setProjects] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Form states
   const [formData, setFormData] = useState({
@@ -40,6 +43,24 @@ export default function AdminDashboard() {
 
   if (authLoading) return <div className="h-screen flex items-center justify-center">Loading...</div>;
   if (!isAdmin) return <Navigate to="/login" replace />;
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const storageRef = ref(storage, `${activeTab}/${Date.now()}_${file.name}`);
+      const snapshot = await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(snapshot.ref);
+      setFormData({ ...formData, imageUrl: url });
+    } catch (err) {
+      console.error("Upload error:", err);
+      alert('Failed to upload image.');
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -203,8 +224,39 @@ export default function AdminDashboard() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Image URL</label>
-                  <input value={formData.imageUrl} onChange={e => setFormData({...formData, imageUrl: e.target.value})} className="w-full glass border-white/10 rounded-xl p-3 text-sm focus:border-primary outline-none" placeholder="https://..." />
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Image Presentation</label>
+                  <div 
+                    onClick={() => fileInputRef.current?.click()}
+                    className="w-full h-48 glass border-2 border-dashed border-white/10 rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-all relative overflow-hidden group"
+                  >
+                    {formData.imageUrl ? (
+                      <>
+                        <img src={formData.imageUrl} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-30 transition-opacity" referrerPolicy="no-referrer" />
+                        <div className="relative z-10 flex flex-col items-center">
+                          <Upload className="w-8 h-8 text-white mb-2" />
+                          <span className="text-xs font-bold text-white uppercase tracking-tighter">Change Image</span>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex flex-col items-center">
+                        {uploading ? (
+                          <Loader2 className="w-8 h-8 text-primary animate-spin" />
+                        ) : (
+                          <>
+                            <ImageIcon className="w-10 h-10 text-gray-500 mb-3" />
+                            <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Click to upload image</span>
+                          </>
+                        )}
+                      </div>
+                    )}
+                    <input 
+                      type="file" 
+                      ref={fileInputRef} 
+                      onChange={handleImageUpload} 
+                      accept="image/*" 
+                      className="hidden" 
+                    />
+                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -235,7 +287,9 @@ export default function AdminDashboard() {
 
                 <div className="flex space-x-4 pt-6">
                    <button type="button" onClick={() => setIsModalOpen(false)} className="flex-grow py-4 glass rounded-2xl font-bold text-sm tracking-widest uppercase hover:bg-white/5 transition-all">Cancel</button>
-                   <button type="submit" className="flex-grow py-4 bg-primary rounded-2xl font-bold text-sm tracking-widest uppercase neon-border hover:scale-105 transition-all">Save Changes</button>
+                   <button type="submit" disabled={uploading} className={`flex-grow py-4 bg-primary rounded-2xl font-bold text-sm tracking-widest uppercase neon-border transition-all ${uploading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}>
+                      {uploading ? 'Uploading...' : 'Save Changes'}
+                   </button>
                 </div>
               </form>
             </motion.div>
